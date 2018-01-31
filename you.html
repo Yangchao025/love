@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../animate.js"></script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding:0;
+    }
+    #get{
+        width:100px;
+        height: 100px;
+        border: 1px solid #000;
+        color: white;
+        border-radius: 200px;
+        box-shadow: 0 0 3px rgba(0,0,0,0.3);
+        text-align: center;
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 100px;
+        position: fixed;
+        top:0;
+        bottom: 0;
+        left:0;
+        right:0;
+        margin: auto;
+        box-sizing: border-box;
+    }
+    body,html{
+        width:100%;
+        height:100%;
+    }
+    body{
+        perspective: 2000px;
+        overflow: hidden;
+        animation: move 5s infinite alternate;
+        background: #000;
+    }
+    div.circle{
+        border-radius: 50%;
+        position: absolute;
+        width:0;
+        height:0;
+    }
+    @keyframes move{
+        from{
+            perspective: 2000px;
+        }
+        to{
+            perspective: 800px;
+        }
+    }
+</style>
+<body>
+  <div id="get">爱</div>
+</body>
+</html>
+<script>
+    let btn=document.querySelector("#get");
+    let cw=document.documentElement.clientWidth;
+    let ch=document.documentElement.clientHeight;
+    btn.onclick=function () {
+        for(let i=0;i<50;i++){
+            setTimeout(function () {
+                let div=document.createElement("div");
+                let w=Math.ceil(Math.random()*50);
+                let r=Math.round(Math.random()*255);
+                let g=Math.round(Math.random()*255);
+                let b=Math.round(Math.random()*255);
+                let a=Math.random().toFixed(1);
+                let rl=Math.random()*cw;
+                let rt=Math.random()*ch;
+                let z=Math.random()*2000-1000;
+                div.style.width=w+'px';
+                div.style.height=w+'px';
+                div.style.background='rgba('+r+','+g+','+b+','+a+')';
+                div.style.transform='translateZ('+z+'px)';
+                div.style.left=rl+'px';
+                div.style.top=rt+'px';
+                div.classList.add('circle');
+                document.body.appendChild(div);
+                animate(div,{left:rl,top:rt});
+            },100*i);
+
+        }
+    }
+</script>
